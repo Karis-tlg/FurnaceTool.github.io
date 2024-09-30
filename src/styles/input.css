@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+body {
+    color: #ababab;
+    font-family: monospace;
+    font-size: 16px;
+}
+
+.suggestion {
+    border: 1px solid #ccc;
+    background: #282c38;
+    position: absolute;
+    max-height: 100px;
+    overflow-y: auto;
+    width: calc(42%);
+    z-index: 1000;
+}
+.suggestion div {
+    padding: 8px;
+    cursor: pointer;
+}
+.suggestion div:hover {
+    background: dodgerblue;
+}
