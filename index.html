@@ -38,7 +38,7 @@
                 </div>
                 <input id="custom_model_data" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="number" placeholder="Custom Model Data">
                 <input id="damage_predicate" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="number" step="0.001" placeholder="Damage Predicate">
-                <input id="icon_2d" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="Icon 2D">
+                <input id="icon_2d" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="Icon Item">
                 <input id="path_add" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="Path Add">
                 <div class="flex flex-row w-1/2 gap-x-1.5">
                     <select id="allow_offhand" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5">
@@ -77,14 +77,14 @@
                     </select>    
                 </div>
             </from>
-            <div class="flex flex-row flex-wrap mx-[4%] gap-1.5">
-                <button class="overflow-hidden bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow basis-1/3 h-8 hover:from-[#000000] hover:to-[#222831]" onclick="add_content()"><i class="fa-solid fa-square-plus"></i> Add Content</button>
-                <button class="overflow-hidden bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow basis-1/3 h-8 hover:from-[#000000] hover:to-[#222831]" onclick="copy_code()"><i class="fa-solid fa-copy"></i> Copy Content</button>
+            <div class="flex flex-wrap mx-[4%] gap-1.5">
+                <button class="overflow-hidden bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow w-[calc(33.3%_-_6px)] h-8 hover:from-[#000000] hover:to-[#222831]" onclick="add_content()"><i class="fa-solid fa-square-plus"></i> Add Content</button>
+                <button class="overflow-hidden bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow w-[calc(33.3%_-_6px)] h-8 hover:from-[#000000] hover:to-[#222831]" onclick="copy_code()"><i class="fa-solid fa-copy"></i> Copy Content</button>
                 <input id="file" class="hidden" type="file" accept="application/json" onchange="load_content_file()">
-                <label for="file" class="overflow-hidden cursor-pointer text-center content-center bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow basis-1/3 h-8 hover:from-[#000000] hover:to-[#222831]"><i class="fa-solid fa-file-arrow-up"></i> Upload content</label>
-                <button id="download" class="overflow-hidden text-center content-center bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow basis-1/3 h-8 hover:from-[#000000] hover:to-[#222831]" onclick="download_content()"><i class="fa-solid fa-download"></i> Download content</button>
-                <button id="delete" class="overflow-hidden bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow basis-1/3 h-8 hover:from-[#000000] hover:to-[#222831]" onclick="delete_code()"><i class="fa-solid fa-trash"></i> Delete Content</button></button>
-                <button id="mode" class="overflow-hidden bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow basis-1/3 h-8 hover:from-[#000000] hover:to-[#222831]" onclick="change_mode()"><i class="fa-solid fa-rotate"></i> Change Mode</button></button>
+                <label for="file" class="overflow-hidden cursor-pointer text-center content-center bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow w-[calc(33.3%_-_3px)] h-8 hover:from-[#000000] hover:to-[#222831]"><i class="fa-solid fa-file-arrow-up"></i> Upload content</label>
+                <button id="download" class="overflow-hidden text-center content-center bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow w-[calc(33.3%_-_6px)] h-8 hover:from-[#000000] hover:to-[#222831]" onclick="download_content()"><i class="fa-solid fa-download"></i> Download content</button>
+                <button id="delete" class="overflow-hidden bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow w-[calc(33.3%_-_6px)] h-8 hover:from-[#000000] hover:to-[#222831]" onclick="delete_code()"><i class="fa-solid fa-trash"></i> Delete Content</button></button>
+                <button id="mode" class="overflow-hidden bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow w-[calc(33.3%_-_3px)] h-8 hover:from-[#000000] hover:to-[#222831]" onclick="change_mode()"><i class="fa-solid fa-rotate"></i> Change Mode</button></button>
             </div>
             <textarea id="code" is="highlighted-code" language="json" tab-size="4" class="w-11/12 h-64 ml-[4%] my-5">{}</textarea>
             <script type="module" defer>(async ({ chrome, netscape }) => { if (!chrome && !netscape) await import('https://unpkg.com/@ungap/custom-elements'); const { default: HighlightedCode } = await import('https://unpkg.com/highlighted-code'); HighlightedCode.useTheme('atom-one-dark'); })(self);</script>
