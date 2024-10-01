@@ -1,3 +1,9 @@
+document.addEventListener("DOMContentLoaded", (event) => {
+    const code = localStorage.getItem("code")
+    if (code) {
+        document.getElementById("code").value = code
+    }
+})
 
 function copy_code() {
     const code = document.getElementById("code").value;
@@ -107,7 +113,9 @@ function add_content() {
         document.getElementById("smallchest").value = ""
         document.getElementById("largechest").value = ""
     }
-    document.getElementById("code").value = JSON.stringify(code_obj, null, 4);
+    const code_str = JSON.stringify(code_obj, null, 4)
+    document.getElementById("code").value = code_str
+    localStorage.setItem("code", code_str)
 }
 
 function load_content_file() {
@@ -117,9 +125,10 @@ function load_content_file() {
         let result_json = JSON.parse(e.target.result)
         if (result_json && typeof result_json === "object" && !("items" in result_json)) {
             result_json = sprites_to_content(result_json)
-            console.log("hu")
         }
-        document.getElementById("code").value = JSON.stringify(result_json, null, 4)
+        const code_str = JSON.stringify(result_json, null, 4)
+        document.getElementById("code").value = code_str
+        localStorage.setItem("code", code_str)
     };
     reader.readAsText(file);
 }
@@ -194,4 +203,5 @@ function change_mode() {
 
 function delete_code() {
     document.getElementById("code").value = "{}"
+    localStorage.setItem("code", "{}")
 }
