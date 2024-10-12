@@ -151,10 +151,10 @@ function sprites_to_content(input) {
     const output = { items: {} }
 
     for (const item in input) {
-        if (!`minecraft:${item}` in output.items) {
+        if (!(`minecraft:${item}` in output.items)) {
             output.items[`minecraft:${item}`] = {}
         }
-        
+
         input[item].forEach(data => {
             if (data.custom_model_data !== undefined) {
                 if (!("custom_model_data" in output.items[`minecraft:${item}`])) {
