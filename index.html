@@ -15,9 +15,6 @@
                 <img class="inline h-14 w-14 m-0 p-0" src="/src/images/logo-nobg.png">
                 <span class="h-10 w-10 text-3xl font-bold content-center text-center pt-3">Furnace</span>
             </a>
-            <div class="flex ml-auto mr-5 items-center content-center gap-1.5 h-16">
-                <a href="/faq" class="text-xl hover:text-blue-600"><i class="fa-solid fa-question"></i> FAQ</a>
-            </div>
         </div>
         <div class="bg-[#393E46] h-auto w-11/12 m-auto rounded">
             <p class="text-xl font-bold p-3">Adding Content</p>
@@ -31,7 +28,7 @@
                     <div id="blockmaterial_suggestions" class="suggestion" style="display: none;"></div>
                 </div>
             </from>
-            <from id="mode-items" class="hidden flex-col gap-1.5 py-5 flex-wrap max-h-[150px] mx-[4%]">
+            <from id="mode-items" class="hidden flex-col gap-1.5 py-5 flex-wrap max-h-[200px] mx-[4%]">
                 <div class="w-1/2">
                     <input id="item_type" class="bg-[#282c38] rounded shadow w-full h-8 pl-1.5" type="text" placeholder="Item Type">
                     <div id="item_suggestions" class="suggestion" style="display: none;"></div>
@@ -46,12 +43,27 @@
                         <option value="true">Allow Offhand: True</option>
                         <option value="false">Allow Offhand: False</option>
                     </select>
-                    <select id="unbreakable" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5">
+                    <select id="unbreakable" class="bg-[#282c38] rounded shadow w-[30%] grow h-8 pl-1.5">
                         <option value="">Unbreakable: Null</option>
                         <option value="true">Unbreakable: True</option>
                         <option value="false">Unbreakable: False</option>
                     </select>
                 </div>
+                <div class="flex flex-row w-1/2 gap-x-1.5">
+                    <select id="armor_type" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5">
+                        <option value="">Armor Type: Null</option>
+                        <option value="helmet">Armor Type: Helmet</option>
+                        <option value="chestplate">Armor Type: Chestplate</option>
+                        <option value="leggings">Armor Type: Leggings</option>
+                        <option value="boots">Armor Type: Boots</option>
+                    </select>
+                    <select id="auto_copy_armor_texture" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5">
+                        <option value="">Auto Copy Armor Texture: Null</option>
+                        <option value="true">Auto Copy Armor Texture: True</option>
+                        <option value="false">Auto Copy Armor Texture: False</option>
+                    </select>
+                </div>
+                <input id="armor_texture" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="Armor Texture">
             </from>
             <from id="mode-fonts" class="hidden flex-col gap-1.5 py-5 flex-wrap max-h-[125px] mx-[4%]">
                 <input id="symbol" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="Font Symbol">

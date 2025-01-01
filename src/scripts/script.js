@@ -42,6 +42,9 @@ function add_content() {
         let icon_2d = document.getElementById("icon_2d").value
         const allow_offhand = document.getElementById("allow_offhand").value != ""? document.getElementById("allow_offhand").value.toLowerCase() === "true" : ""
         const unbreakable = document.getElementById("unbreakable").value != ""? document.getElementById("unbreakable").value.toLowerCase() === "true" : ""
+        const armor_type = document.getElementById("armor_type").value
+        const armor_texture = document.getElementById("armor_texture").value
+        const auto_copy_texture_armor = document.getElementById("auto_copy_armor_texture").value != ""? document.getElementById("auto_copy_armor_texture").value.toLowerCase() === "true" : ""
 
         if (!item_type || (!custom_model_data && !damage_predicate)) {
             return
@@ -69,7 +72,13 @@ function add_content() {
         if (icon_2d !== "") {properties["icon"] = icon_2d}
         if (allow_offhand !== "") {properties["allow_offhand"] = allow_offhand}
         if (unbreakable !== "") {properties["unbreakable"] = unbreakable}
-
+        if (armor_texture !== "" && armor_type !== "" && auto_copy_texture_armor !== ""){
+            properties["armor_layer"] = {
+                "type": armor_type,
+                "texture": armor_texture + (armor_texture.endsWith(".png") ? "" : ".png"),
+                "auto_copy_texture": auto_copy_texture_armor
+            }
+        }
         if (Object.keys(properties).length > 0) {
             if (custom_model_data) {
                 code_obj["items"][item]["custom_model_data"][custom_model_data] = properties
@@ -83,6 +92,9 @@ function add_content() {
         document.getElementById("custom_model_data").value = ""
         document.getElementById("damage_predicate").value = ""
         document.getElementById("icon_2d").value = ""
+        document.getElementById("armor_type").value = ""
+        document.getElementById("armor_texture").value = ""
+        document.getElementById("auto_copy_armor_texture").value = ""
     } else {
         const symbol = charToHex(document.getElementById("symbol").value)
         const offset_x = document.getElementById("offset-x").value != "" ? Number(document.getElementById("offset-x").value) : ""
