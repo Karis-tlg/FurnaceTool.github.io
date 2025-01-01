@@ -628,6 +628,14 @@ video {
   max-height: 200px;
 }
 
+.max-h-\[190px\] {
+  max-height: 190px;
+}
+
+.max-h-\[195px\] {
+  max-height: 195px;
+}
+
 .w-1\/2 {
   width: 50%;
 }
