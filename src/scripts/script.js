@@ -1,9 +1,53 @@
 document.addEventListener("DOMContentLoaded", (event) => {
     const code = localStorage.getItem("code")
-    if (code) {
-        document.getElementById("code").value = code
-    }
+    if (code) document.getElementById("code").value = code
+    
+    const guiimage = document.getElementById("gui-image")
+    const GuixInput = document.getElementById("offset-x")
+    const GuiyInput = document.getElementById("offset-y")
+    const GuiWidth = document.getElementById("size-width")
+    const GuiHeight = document.getElementById("size-height")
+    
+    update_gui_position = () => {update_preview_gui_position(GuixInput, GuiyInput, guiimage)}
+    GuixInput.addEventListener("input", update_gui_position)
+    GuiyInput.addEventListener("input", update_gui_position)
+
+    update_gui_size = () => {update_preview_gui_size(GuiWidth, GuiHeight, guiimage)}
+    GuiWidth.addEventListener("input", update_gui_size)
+    GuiHeight.addEventListener("input", update_gui_size)
 })
+
+function update_preview_gui_position(GuixInput, GuiyInput, guiimage) {
+    const x = parseInt(GuixInput.value * 2)
+    const y = parseInt(GuiyInput.value * 2)
+
+    guiimage.style.marginLeft = `${x}px`
+    guiimage.style.marginTop = `${y}px`
+}
+
+function update_preview_gui_size(GuiWidth, GuiHeight, guiimage) {
+    const x = parseInt(GuiWidth.value) || ""
+    const y = parseInt(GuiHeight.value) || ""
+    
+    guiimage.style.width = x !== "" ? `${x}px` : ""
+    guiimage.style.height = y !== "" ? `${y}px` : ""
+}
+
+function change_gui_opacity() {
+    const guiimage = document.getElementById("gui-image")
+    const opacity_value = parseFloat(document.getElementById("opacity-gui").value)
+    guiimage.style.opacity = opacity_value
+}
+
+function change_gui_image(event){
+    if (!event.target.files.length) return
+    const reader = new FileReader()
+    reader.onload = () => {
+        const guiimage = document.getElementById("gui-image")
+        guiimage.src = reader.result
+    }
+    reader.readAsDataURL(event.target.files[0])
+}
 
 function copy_code() {
     const code = document.getElementById("code").value;
@@ -97,17 +141,20 @@ function add_content() {
         document.getElementById("auto_copy_armor_texture").value = ""
     } else {
         const symbol = charToHex(document.getElementById("symbol").value)
-        const offset_x = document.getElementById("offset-x").value != "" ? Number(document.getElementById("offset-x").value) : ""
-        const offset_y = document.getElementById("offset-y").value != "" ? Number(document.getElementById("offset-y").value) : ""
+        const offset_x = document.getElementById("offset-x").value != "" ? parseInt(document.getElementById("offset-x").value) : ""
+        const offset_y = document.getElementById("offset-y").value != "" ? parseInt(document.getElementById("offset-y").value) : ""
+        const size_x = document.getElementById("size-width").value != "" ? parseInt(document.getElementById("size-width").value) : ""
+        const size_y = document.getElementById("size-height").value != "" ? parseInt(document.getElementById("size-height").value) : ""
         const ignore = document.getElementById("ignore").value != "" ? document.getElementById("ignore").value.toLowerCase() === "true" : ""
         const smallchest = document.getElementById("smallchest").value != "" ? document.getElementById("smallchest").value.toLowerCase() === "true" : ""
         const largechest = document.getElementById("largechest").value != "" ? document.getElementById("largechest").value.toLowerCase() === "true" : ""
 
         const properties = {}
         if (ignore !== "") {properties["ignore"] = true}
-        if (offset_x !== "" || offset_y !== "" || smallchest !== "" || largechest !== ""){
+        if (smallchest !== "" || largechest !== ""){
             properties["gui"] = {}
-            if (offset_x !== "" || offset_y !== "") {properties["gui"]["offset"] = [offset_x, offset_y]}
+            if (offset_x !== "" || offset_y !== "") {properties["gui"]["offset"] = [offset_x || 0, offset_y || 0]}
+            if (size_x !== "" || size_y !== "") {properties["gui"]["size"] = [size_x || "default", size_y || "default"]}
             if (smallchest !== "") {properties["gui"]["smallchest"] = true}
             if (largechest !== "") {properties["gui"]["largechest"] = true}
         }
@@ -122,10 +169,12 @@ function add_content() {
         document.getElementById("ignore").value = ""
         document.getElementById("offset-x").value = ""
         document.getElementById("offset-y").value = ""
+        document.getElementById("size-width").value = ""
+        document.getElementById("size-height").value = ""
         document.getElementById("smallchest").value = ""
         document.getElementById("largechest").value = ""
     }
-    const code_str = JSON.stringify(code_obj, null, 4)
+    const code_str = JSON.stringify(code_obj, (key, value) => {return Array.isArray(value) ? JSON.stringify(value) : value}, "\t").replace(/"\[(.*?)\]"/g, "[$1]")
     document.getElementById("code").value = code_str
     localStorage.setItem("code", code_str)
 }
@@ -194,6 +243,18 @@ function sprites_to_content(input) {
     return output
 }
 
+function resize_gui_preview(){
+    const preview_width = document.getElementById("preview-gui").clientWidth
+    const gui_preview_width = document.getElementById("gui-bg-image").clientWidth
+    const zoomgui = preview_width / gui_preview_width
+    if (zoomgui < 1){
+        document.getElementById("gui-image").style.zoom = zoomgui * 0.8
+        document.getElementById("gui-bg-image").style.zoom = zoomgui * 0.8
+    }
+}
+
+window.addEventListener("resize", () => {if (document.getElementById("mode-fonts").classList.contains("flex")) resize_gui_preview() })
+
 function change_mode() {
     if (document.getElementById("mode-settings").classList.contains("flex")){
         document.getElementById("mode-items").classList.replace("hidden", "flex")
@@ -201,6 +262,7 @@ function change_mode() {
     } else if (document.getElementById("mode-items").classList.contains("flex")){
         document.getElementById("mode-fonts").classList.replace("hidden", "flex")
         document.getElementById("mode-items").classList.replace("flex", "hidden")
+        resize_gui_preview()
     } else {
         document.getElementById("mode-settings").classList.replace("hidden", "flex")
         document.getElementById("mode-fonts").classList.replace("flex", "hidden")

@@ -65,7 +65,7 @@
                 </div>
                 <input id="armor_texture" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="Armor Texture">
             </from>
-            <from id="mode-fonts" class="hidden flex-col gap-1.5 py-5 flex-wrap max-h-[125px] mx-[4%]">
+            <from id="mode-fonts" class="hidden flex-col gap-1.5 py-5 flex-wrap max-h-96 mx-[4%]">
                 <input id="symbol" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="Font Symbol">
                 <select id="ignore" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5">
                     <option value="">Ignore: Null</option>
@@ -73,8 +73,12 @@
                     <option value="false">Ignore: False</option>
                 </select>
                 <div class="flex flex-row w-1/2 gap-x-1.5">
-                    <input id="offset-x" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="number" placeholder="Gui Offset X">
-                    <input id="offset-y" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="number" placeholder="Gui Offset Y">
+                    <input id="offset-x" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="Gui Offset X">
+                    <input id="offset-y" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="Gui Offset Y">
+                </div>
+                <div class="flex flex-row w-1/2 gap-x-1.5">
+                    <input id="size-width" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="number" placeholder="Gui Width">
+                    <input id="size-height" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="number" placeholder="Gui Height">
                 </div>
                 <div class="flex flex-row w-1/2 gap-x-1.5">
                     <select id="smallchest" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5">
@@ -82,11 +86,29 @@
                         <option value="true">Gui Small Chest: True</option>
                         <option value="false">Gui Small Chest: False</option>
                     </select>
-                    <select id="largechest" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5">
+                    <select id="largechest" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" aria-placeholder="Upload gui image">
                         <option value="">Gui Large Chest: Null</option>
                         <option value="true">Gui Large Chest: True</option>
                         <option value="false">Gui Large Chest: False</option>
-                    </select>    
+                    </select>
+                </div>
+                <div class="flex flex-row w-1/2 gap-x-1.5">
+                    <input id="gui-image-upload" type="file" accept="image/*" onchange="change_gui_image(event)" hidden>
+                    <label for="gui-image-upload" class="bg-[#282c38] rounded shadow h-8 w-1/2 pl-1.5 block content-center truncate">Upload Gui Texture</label>
+                    <select id="gui-bg" class="bg-[#282c38] rounded shadow h-8 w-1/2 pl-1.5" onchange="document.getElementById('gui-bg-image').src = `/src/images/generic_${this.value}.png`">
+                        <option value="54">Row: 54</option>
+                        <option value="45">Row: 45</option>
+                        <option value="36">Row: 36</option>
+                        <option value="27">Row: 27</option>
+                        <option value="18">Row: 18</option>
+                        <option value="9">Row: 9</option>
+                        <option value="5">Row: 5</option>
+                    </select>
+                </div>
+                <input id="opacity-gui" oninput="change_gui_opacity()" type="range" min="0" max="1" step="0.01" value="1" class="bg-[#282c38] accent-gray-700 rounded shadow h-8 w-1/2 pl-1.5" placeholder="Gui Opacity">
+                <div id="preview-gui" class="bg-[#202020] w-1/2 h-64 flex rounded shadow items-center justify-center -z-50">
+                    <img id="gui-bg-image" src="/src/images/generic_54.png" class="pointer-events-none absolute">
+                    <img id="gui-image" class="absolute">
                 </div>
             </from>
             <div class="flex flex-wrap mx-[4%] gap-1.5">
@@ -102,7 +124,7 @@
             <script type="module" defer>(async ({ chrome, netscape }) => { if (!chrome && !netscape) await import('https://unpkg.com/@ungap/custom-elements'); const { default: HighlightedCode } = await import('https://unpkg.com/highlighted-code'); HighlightedCode.useTheme('atom-one-dark'); })(self);</script>
         </div>
         <footer class="flex items-center justify-center w-full mt-3">
-            <span class="text-sm font-bold">&copy; 2024 <a href="https://discord.gg/4jvpVGpeBE">Furnace</a>. All rights reserved.</span>
+            <span class="text-sm font-bold">&copy; 2025 <a href="https://discord.gg/4jvpVGpeBE">Furnace</a>. All rights reserved.</span>
         </footer>
         <script src="/src/scripts/suggestion.js"></script>
     </body>
