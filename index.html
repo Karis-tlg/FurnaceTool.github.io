@@ -7,6 +7,7 @@
         <script src="https://kit.fontawesome.com/24fada58cd.js" crossorigin="anonymous"></script>
         <link href="/src/styles/style.css" rel="stylesheet">
         <link href="/src/images/logo.png" rel="icon" type="image/png">
+        <script src="https://www.unpkg.com/ace-builds@latest/src-noconflict/ace.js"></script>
         <title>Furnace</title>
     </head>
     <body class="bg-[#222831] m-0 p-0">
@@ -106,7 +107,7 @@
                     </select>
                 </div>
                 <input id="opacity-gui" oninput="change_gui_opacity()" type="range" min="0" max="1" step="0.01" value="1" class="bg-[#282c38] accent-gray-700 rounded shadow h-8 w-1/2 pl-1.5" placeholder="Gui Opacity">
-                <div id="preview-gui" class="bg-[#202020] w-1/2 h-64 flex rounded shadow items-center justify-center -z-50">
+                <div id="preview-gui" class="bg-[#202020] w-1/2 h-64 flex rounded shadow items-center justify-center">
                     <img id="gui-bg-image" src="/src/images/generic_54.png" class="pointer-events-none absolute">
                     <img id="gui-image" class="absolute">
                 </div>
@@ -120,10 +121,10 @@
                 <button id="delete" class="overflow-hidden bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow w-[calc(33.3%_-_6px)] h-6 hover:from-[#000000] hover:to-[#222831]" onclick="delete_code()"><i class="fa-solid fa-trash"></i> Delete Content</button></button>
                 <button id="mode" class="overflow-hidden bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow w-[calc(33.3%_-_3px)] h-6 hover:from-[#000000] hover:to-[#222831]" onclick="change_mode()"><i class="fa-solid fa-rotate"></i> Change Mode</button></button>
             </div>
-            <textarea id="code" is="highlighted-code" language="json" tab-size="4" class="w-11/12 h-64 ml-[4%] my-5">{}</textarea>
-            <script type="module" defer>(async ({ chrome, netscape }) => { if (!chrome && !netscape) await import('https://unpkg.com/@ungap/custom-elements'); const { default: HighlightedCode } = await import('https://unpkg.com/highlighted-code'); HighlightedCode.useTheme('atom-one-dark'); })(self);</script>
+            <div id="jsonview" class="w-11/12 h-60 mx-auto rounded my-3"></div>
+            <script>ace.edit("jsonview", {theme: "ace/theme/one_dark", mode: "ace/mode/json", value: localStorage.getItem("code")})</script>
         </div>
-        <footer class="flex items-center justify-center w-full mt-3">
+        <footer class="flex items-center justify-center w-full">
             <span class="text-sm font-bold">&copy; 2025 <a href="https://discord.gg/4jvpVGpeBE">Furnace</a>. All rights reserved.</span>
         </footer>
         <script src="/src/scripts/suggestion.js"></script>

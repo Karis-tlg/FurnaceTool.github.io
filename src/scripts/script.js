@@ -1,7 +1,4 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-    const code = localStorage.getItem("code")
-    if (code) document.getElementById("code").value = code
-    
     const guiimage = document.getElementById("gui-image")
     const GuixInput = document.getElementById("offset-x")
     const GuiyInput = document.getElementById("offset-y")
@@ -50,7 +47,7 @@ function change_gui_image(event){
 }
 
 function copy_code() {
-    const code = document.getElementById("code").value;
+    const code = ace.edit("jsonview").getValue();
     navigator.clipboard.writeText(code);
 }
 
@@ -63,7 +60,7 @@ function charToHex(char) {
 }
 
 function add_content() {
-    const code = document.getElementById("code").value
+    const code = ace.edit("jsonview").getValue()
     const code_obj = JSON.parse(code)
     if (document.getElementById("mode-settings").classList.contains("flex")){
         const material = document.getElementById("material").value
@@ -175,7 +172,7 @@ function add_content() {
         document.getElementById("largechest").value = ""
     }
     const code_str = JSON.stringify(code_obj, (key, value) => {return Array.isArray(value) ? JSON.stringify(value) : value}, "\t").replace(/"\[(.*?)\]"/g, "[$1]")
-    document.getElementById("code").value = code_str
+    ace.edit("jsonview").setValue(code_str)
     localStorage.setItem("code", code_str)
 }
 
@@ -188,14 +185,14 @@ function load_content_file() {
             result_json = sprites_to_content(result_json)
         }
         const code_str = JSON.stringify(result_json, null, 4)
-        document.getElementById("code").value = code_str
+        ace.edit("jsonview").setValue(code_str)
         localStorage.setItem("code", code_str)
     };
     reader.readAsText(file);
 }
 
 function download_content() {
-    const code = document.getElementById("code").value
+    const code = ace.edit("jsonview").getValue()
     const blob = new Blob([code], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
     var a = document.createElement('a')
@@ -267,17 +264,16 @@ function change_mode() {
         document.getElementById("mode-settings").classList.replace("hidden", "flex")
         document.getElementById("mode-fonts").classList.replace("flex", "hidden")
     }
-
-    const code = document.getElementById("code")
-    const code_pre = document.querySelector(".highlighted-code")
-
-    const box = code.getBoundingClientRect()
-
-    code_pre.style.top = `${box.top}px`
-    code_pre.style.left = `${box.left}px`
 }
 
 function delete_code() {
-    document.getElementById("code").value = "{}"
+    ace.edit("jsonview").setValue("{}")
     localStorage.setItem("code", "{}")
+}
+
+function load_ace() {
+    ace.edit("jsonview", {
+        theme: "one_dark",
+        mode: "json"
+    })
 }
