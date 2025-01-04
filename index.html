@@ -129,7 +129,7 @@
                 </div>
             </div>
             <div id="jsonview" class="w-11/12 h-60 mx-auto rounded my-3"></div>
-            <script>ace.edit("jsonview", {theme: "ace/theme/one_dark", mode: "ace/mode/json", value: localStorage.getItem("code")}).setShowPrintMargin(false)</script>
+            <script>ace.edit("jsonview", {theme: "ace/theme/one_dark", mode: "ace/mode/json", value: localStorage.getItem("code") || "{}"}).setShowPrintMargin(false)</script>
         </div>
         <footer class="flex items-center justify-center w-full">
             <span class="text-sm font-bold">&copy; 2025 <a href="https://discord.gg/4jvpVGpeBE">Furnace</a>. All rights reserved.</span>

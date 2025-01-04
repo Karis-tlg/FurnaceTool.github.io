@@ -19,6 +19,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     update_gui_size = () => {update_preview_gui_size(GuiWidth, GuiHeight, guiimage)}
     GuiWidth.addEventListener("input", update_gui_size)
     GuiHeight.addEventListener("input", update_gui_size)
+
+    const JsonEditor = ace.edit("jsonview")
+    JsonEditor.on("change", () => {localStorage.setItem("code", JsonEditor.getValue())})
 })
 
 function update_preview_gui_position(GuixInput, GuiyInput, guiimage) {
@@ -180,7 +183,6 @@ function add_content() {
     }
     const code_str = JSON.stringify(code_obj, (key, value) => {return Array.isArray(value) ? JSON.stringify(value) : value}, "\t").replace(/"\[(.*?)\]"/g, "[$1]")
     ace.edit("jsonview").setValue(code_str)
-    localStorage.setItem("code", code_str)
 }
 
 function load_content_file() {
@@ -193,7 +195,6 @@ function load_content_file() {
         }
         const code_str = JSON.stringify(result_json, null, 4)
         ace.edit("jsonview").setValue(code_str)
-        localStorage.setItem("code", code_str)
     };
     reader.readAsText(file);
 }
@@ -269,14 +270,4 @@ function change_mode(mode_enable) {
     if (mode_enable==="mode-fonts") resize_gui_preview()
 }
 
-function delete_code() {
-    ace.edit("jsonview").setValue("{}")
-    localStorage.setItem("code", "{}")
-}
-
-function load_ace() {
-    ace.edit("jsonview", {
-        theme: "one_dark",
-        mode: "json"
-    })
-}
+function delete_code() {ace.edit("jsonview").setValue("{}")}
