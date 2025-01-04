@@ -46,7 +46,7 @@ function add_suggest(input, suggestionsDiv, suggestionsList) {
         if (event.key === 'Enter') {
             const firstSuggestion = suggestionsDiv.querySelector('div');
             if (firstSuggestion) {
-                input.value = firstSuggestion.textContent; // Lấy giá trị gợi ý đầu tiên
+                input.value = firstSuggestion.textContent;
                 suggestionsDiv.innerHTML = '';
                 suggestionsDiv.style.display = 'none';
             }

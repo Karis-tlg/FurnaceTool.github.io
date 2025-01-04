@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", (event) => {
+    window.onclick = (event) => {
+        if (!event.target.matches("#mode-change")) {
+            const mode_change_content = document.getElementById("mode-change-contents")
+            if (!mode_change_content.classList.contains("hidden")) mode_change_content.classList.add("hidden")
+        }
+    }
+
     const guiimage = document.getElementById("gui-image")
     const GuixInput = document.getElementById("offset-x")
     const GuiyInput = document.getElementById("offset-y")
@@ -252,18 +259,14 @@ function resize_gui_preview(){
 
 window.addEventListener("resize", () => {if (document.getElementById("mode-fonts").classList.contains("flex")) resize_gui_preview() })
 
-function change_mode() {
-    if (document.getElementById("mode-settings").classList.contains("flex")){
-        document.getElementById("mode-items").classList.replace("hidden", "flex")
-        document.getElementById("mode-settings").classList.replace("flex", "hidden")
-    } else if (document.getElementById("mode-items").classList.contains("flex")){
-        document.getElementById("mode-fonts").classList.replace("hidden", "flex")
-        document.getElementById("mode-items").classList.replace("flex", "hidden")
-        resize_gui_preview()
-    } else {
-        document.getElementById("mode-settings").classList.replace("hidden", "flex")
-        document.getElementById("mode-fonts").classList.replace("flex", "hidden")
+function change_mode(mode_enable) {
+    const modes = ["mode-settings", "mode-items", "mode-fonts"]
+    for (const disable_mode of modes){
+        const element = document.getElementById(disable_mode)
+        if (element.classList.contains("flex")) element.classList.replace("flex", "hidden")
     }
+    document.getElementById(mode_enable).classList.replace("hidden", "flex")
+    if (mode_enable==="mode-fonts") resize_gui_preview()
 }
 
 function delete_code() {
