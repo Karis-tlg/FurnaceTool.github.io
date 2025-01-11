@@ -12,21 +12,41 @@
     </head>
     <body class="bg-[#222831] m-0 p-0">
         <div class="flex items-center w-full h-16">
-            <a href="/" class="h-16 overflow-hidden">
+            <a href="/" class="flex items-center w-1/4 overflow-hidden">
                 <img class="inline h-14 w-14 m-0 p-0" src="/src/images/logo-nobg.png">
-                <span class="h-10 w-10 text-3xl font-bold content-center text-center pt-3">Furnace</span>
+                <span class="h-10 text-3xl font-bold content-center text-center">Furnace</span>
             </a>
+            <div class="absolute flex right-0 mr-1.5 items-center">
+                <a href="https://discord.gg/4jvpVGpeBE">
+                    <span class="hover:text-blue-500 h-10 text-xl font-bold content-center text-center"><i class="fa-brands fa-discord"></i> Discord</span>
+                </a>
+            </div>
         </div>
-        <div class="bg-[#393E46] h-auto w-11/12 m-auto rounded">
+        <div class="bg-[#393E46] w-11/12 m-auto rounded pb-1.5">
             <p class="text-xl font-bold p-3">Adding Content</p>
-            <from id="mode-settings" class="flex flex-row gap-1.5 py-5 h-16 mx-[4%]">
-                <div class="w-1/2">
-                    <input id="material" class="bg-[#282c38] rounded shadow w-full h-8 pl-1.5" type="text" placeholder="Material">
-                    <div id="material_suggestions" class="suggestion" style="display: none;"></div>
+            <from id="mode-settings" class="flex flex-row flex-wrap gap-1.5 py-5 max-h-48 mx-[4%]">
+                <div class="flex flex-row w-full gap-x-1.5">
+                    <div class="w-1/2">
+                        <input id="material" class="bg-[#282c38] rounded shadow w-full h-8 pl-1.5" type="text" placeholder="Material">
+                        <div id="material_suggestions" class="suggestion" style="display: none;"></div>
+                    </div>
+                    <div class="w-1/2">
+                        <input id="blockmaterial" class="bg-[#282c38] rounded shadow w-full h-8 pl-1.5" type="text" placeholder="Block Material">
+                        <div id="blockmaterial_suggestions" class="suggestion" style="display: none;"></div>
+                    </div>
                 </div>
-                <div class="w-1/2">
-                    <input id="blockmaterial" class="bg-[#282c38] rounded shadow w-full h-8 pl-1.5" type="text" placeholder="Block Material">
-                    <div id="blockmaterial_suggestions" class="suggestion" style="display: none;"></div>
+                <select id="modelengine_model" class="bg-[#282c38] rounded shadow w-full h-8 pl-1.5">
+                    <option value="">Model Engine Generate Model: Null</option>
+                    <option value="true">Model Engine Generate Model: True</option>
+                    <option value="false">Model Engine Generate Model: False</option>
+                    <option value="modelengine3">Model Engine Generate Model: ModelEngine3</option>
+                </select>
+                <div class="flex flex-row w-full gap-x-1.5">
+                    <div class="w-1/2">
+                        <input id="modelengine_item" class="bg-[#282c38] rounded shadow w-full h-8 pl-1.5" type="text" placeholder="ModelEngine Item">
+                        <div id="modelengine_item_suggestions" class="suggestion" style="display: none;"></div>
+                    </div>
+                    <input id="modelengine_namespace" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="ModelEngine Namespace">
                 </div>
             </from>
             <from id="mode-items" class="hidden flex-col gap-1.5 py-5 flex-wrap max-h-[195px] mx-[4%]">
@@ -87,7 +107,7 @@
                         <option value="true">Gui Small Chest: True</option>
                         <option value="false">Gui Small Chest: False</option>
                     </select>
-                    <select id="largechest" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" aria-placeholder="Upload gui image">
+                    <select id="largechest" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5">
                         <option value="">Gui Large Chest: Null</option>
                         <option value="true">Gui Large Chest: True</option>
                         <option value="false">Gui Large Chest: False</option>

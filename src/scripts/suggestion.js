@@ -5,6 +5,11 @@ const item_suggestionsDiv = document.getElementById('item_suggestions')
 
 add_suggest(item_input, item_suggestionsDiv, items)
 
+const modelengine_item_input = document.getElementById('modelengine_item')
+const modelengine_item_suggestionsDiv = document.getElementById('modelengine_item_suggestions')
+
+add_suggest(modelengine_item_input, modelengine_item_suggestionsDiv, items)
+
 const materials = ["entity", "entity_alphatest", "entity_alphablend", "entity_alphatest_one_sided", "entity_emissive_alpha_one_sided"]
 const material_input = document.getElementById("material")
 const material_suggestionsDiv = document.getElementById("material_suggestions")

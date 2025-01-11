@@ -6,6 +6,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
     }
 
+    window.addEventListener("beforeunload", (e) => {
+        e.preventDefault();
+    });
+
     const guiimage = document.getElementById("gui-image")
     const GuixInput = document.getElementById("offset-x")
     const GuiyInput = document.getElementById("offset-y")
@@ -75,6 +79,9 @@ function add_content() {
     if (document.getElementById("mode-settings").classList.contains("flex")){
         const material = document.getElementById("material").value
         const blockmaterial = document.getElementById("blockmaterial").value
+        const modelengine_model = document.getElementById("modelengine_model").value
+        const modelengine_item = document.getElementById("modelengine_item").value
+        const modelengine_namespace = document.getElementById("modelengine_namespace").value
 
         if (material != ""){
             code_obj["material"] = material
@@ -82,9 +89,24 @@ function add_content() {
         if (blockmaterial != "") {
             code_obj["blockmaterial"] = blockmaterial
         }
+        if (modelengine_model != "") {
+            if (!code_obj["modelengine"]) {
+                code_obj["modelengine"] = {}
+            }
+            code_obj["modelengine"]["generate_model"] = modelengine_model === "modelengine3" ? modelengine_model : modelengine_model === "true"
+            if (modelengine_item != "") {
+                code_obj["modelengine"]["item"] = modelengine_item
+            }
+            if (modelengine_namespace != "") {
+                code_obj["modelengine"]["namespace"] = modelengine_namespace
+            }
+        }
         
         document.getElementById("material").value = ""
         document.getElementById("blockmaterial").value = ""
+        document.getElementById("modelengine_model").value = ""
+        document.getElementById("modelengine_item").value = ""
+        document.getElementById("modelengine_namespace").value = ""
     } else if (document.getElementById("mode-items").classList.contains("flex")) {
         const item_type = document.getElementById("item_type").value
         const custom_model_data = document.getElementById("custom_model_data").value
