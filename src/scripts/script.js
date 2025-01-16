@@ -100,8 +100,6 @@ function change_gui_opacity() {
     document.getElementById("opacity-label").textContent = `GUI Opacity: ${Math.round(opacityValue * 100)}%`;
 }
 
-
-
 function change_gui_image(event) {
     if (!event.target.files.length) return
     const reader = new FileReader()
@@ -285,7 +283,6 @@ function download_content() {
     document.body.removeChild(a)
     URL.revokeObjectURL(url)
 }
-
 
 function sprites_to_content(input) {
     const output = { items: {} }
