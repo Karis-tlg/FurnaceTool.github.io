@@ -1,32 +1,80 @@
-document.addEventListener("DOMContentLoaded", (event) => {
-    window.onclick = (event) => {
-        if (!event.target.matches("#mode-change")) {
-            const mode_change_content = document.getElementById("mode-change-contents")
-            if (!mode_change_content.classList.contains("hidden")) mode_change_content.classList.add("hidden")
-        }
-    }
+document.addEventListener("DOMContentLoaded", () => {
+    const $ = (id) => document.getElementById(id);
+    const guiImageUpload = $("gui-image-upload");
+    const guiImageLabel = $("gui-image-label");
+    const guiImage = $("gui-image");
+    const JsonEditor = ace.edit("jsonview");
 
-    window.addEventListener("beforeunload", (e) => {
+    window.onclick = (e) => {
+        if (!e.target.matches("#mode-change")) $("mode-change-contents")?.classList.add("hidden");
+    };
+    window.addEventListener("beforeunload", (e) => e.preventDefault());
+
+    const setDragStyle = (isDragging) => {
+        if (isDragging) {
+            guiImageLabel.textContent = "Drag & Drop to Upload";
+            guiImageLabel.style.backgroundColor = "#4a5568";
+            guiImageLabel.style.opacity = "0.5";
+        } else {
+            guiImageLabel.textContent = "Upload GUI Texture";
+            guiImageLabel.style.backgroundColor = "";
+            guiImageLabel.style.opacity = "1";
+        }
+    };
+
+    ["dragenter", "dragover"].forEach((ev) =>
+        guiImageLabel.addEventListener(ev, (e) => {
+            e.preventDefault();
+            setDragStyle(true);
+        })
+    );
+    ["dragleave", "drop"].forEach((ev) =>
+        guiImageLabel.addEventListener(ev, (e) => {
+            e.preventDefault();
+            setDragStyle(false);
+        })
+    );
+
+    guiImageLabel.addEventListener("drop", (e) => {
         e.preventDefault();
+        const file = e.dataTransfer.files[0];
+        if (file?.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = () => (guiImage.src = reader.result);
+            reader.readAsDataURL(file);
+        } else alert("Please drop a valid image file.");
     });
 
-    const guiimage = document.getElementById("gui-image")
-    const GuixInput = document.getElementById("offset-x")
-    const GuiyInput = document.getElementById("offset-y")
-    const GuiWidth = document.getElementById("size-width")
-    const GuiHeight = document.getElementById("size-height")
-    
-    update_gui_position = () => {update_preview_gui_position(GuixInput, GuiyInput, guiimage)}
-    GuixInput.addEventListener("input", update_gui_position)
-    GuiyInput.addEventListener("input", update_gui_position)
+    guiImageUpload.addEventListener("change", change_gui_image);
 
-    update_gui_size = () => {update_preview_gui_size(GuiWidth, GuiHeight, guiimage)}
-    GuiWidth.addEventListener("input", update_gui_size)
-    GuiHeight.addEventListener("input", update_gui_size)
+    const setupInput = (id1, id2, callback) => {
+        const input1 = $(id1);
+        const input2 = $(id2);
+        const update = () => callback(input1, input2);
+        input1.addEventListener("input", update);
+        input2.addEventListener("input", update);
+    };
+    setupInput("offset-x", "offset-y", (xInput, yInput) =>
+        update_preview_gui_position(xInput, yInput, guiImage)
+    );
+    setupInput("size-width", "size-height", (wInput, hInput) =>
+        update_preview_gui_size(wInput, hInput, guiImage)
+    );
+    $("opacity-gui").addEventListener("input", change_gui_opacity);
+    JsonEditor.on("change", () => localStorage.setItem("code", JsonEditor.getValue()));
 
-    const JsonEditor = ace.edit("jsonview")
-    JsonEditor.on("change", () => {localStorage.setItem("code", JsonEditor.getValue())})
-})
+    window.addEventListener("resize", () => {
+        if ($("mode-fonts").classList.contains("flex")) resize_gui_preview();
+    });
+});
+
+function update_preview_gui_position(GuixInput, GuiyInput, guiimage) {
+    const x = parseInt(GuixInput.value * 2)
+    const y = parseInt(GuiyInput.value * 2)
+
+    guiimage.style.marginLeft = `${x}px`
+    guiimage.style.marginTop = `${y}px`
+}
 
 function update_preview_gui_position(GuixInput, GuiyInput, guiimage) {
     const x = parseInt(GuixInput.value * 2)
@@ -39,18 +87,22 @@ function update_preview_gui_position(GuixInput, GuiyInput, guiimage) {
 function update_preview_gui_size(GuiWidth, GuiHeight, guiimage) {
     const x = parseInt(GuiWidth.value) || ""
     const y = parseInt(GuiHeight.value) || ""
-    
+
     guiimage.style.width = x !== "" ? `${x}px` : ""
     guiimage.style.height = y !== "" ? `${y}px` : ""
 }
 
 function change_gui_opacity() {
-    const guiimage = document.getElementById("gui-image")
-    const opacity_value = parseFloat(document.getElementById("opacity-gui").value)
-    guiimage.style.opacity = opacity_value
+    const opacitySlider = document.getElementById("opacity-gui");
+    const opacityValue = parseFloat(opacitySlider.value);
+
+    document.getElementById("gui-image").style.opacity = opacityValue;
+    document.getElementById("opacity-label").textContent = `GUI Opacity: ${Math.round(opacityValue * 100)}%`;
 }
 
-function change_gui_image(event){
+
+
+function change_gui_image(event) {
     if (!event.target.files.length) return
     const reader = new FileReader()
     reader.onload = () => {
@@ -76,14 +128,14 @@ function charToHex(char) {
 function add_content() {
     const code = ace.edit("jsonview").getValue()
     const code_obj = JSON.parse(code)
-    if (document.getElementById("mode-settings").classList.contains("flex")){
+    if (document.getElementById("mode-settings").classList.contains("flex")) {
         const material = document.getElementById("material").value
         const blockmaterial = document.getElementById("blockmaterial").value
         const modelengine_model = document.getElementById("modelengine_model").value
         const modelengine_item = document.getElementById("modelengine_item").value
         const modelengine_namespace = document.getElementById("modelengine_namespace").value
 
-        if (material != ""){
+        if (material != "") {
             code_obj["material"] = material
         }
         if (blockmaterial != "") {
@@ -101,7 +153,7 @@ function add_content() {
                 code_obj["modelengine"]["namespace"] = modelengine_namespace
             }
         }
-        
+
         document.getElementById("material").value = ""
         document.getElementById("blockmaterial").value = ""
         document.getElementById("modelengine_model").value = ""
@@ -113,11 +165,11 @@ function add_content() {
         const damage_predicate = document.getElementById("damage_predicate").value
         const path_add = document.getElementById("path_add").value
         let icon_2d = document.getElementById("icon_2d").value
-        const allow_offhand = document.getElementById("allow_offhand").value != ""? document.getElementById("allow_offhand").value.toLowerCase() === "true" : ""
-        const unbreakable = document.getElementById("unbreakable").value != ""? document.getElementById("unbreakable").value.toLowerCase() === "true" : ""
+        const allow_offhand = document.getElementById("allow_offhand").value != "" ? document.getElementById("allow_offhand").value.toLowerCase() === "true" : ""
+        const unbreakable = document.getElementById("unbreakable").value != "" ? document.getElementById("unbreakable").value.toLowerCase() === "true" : ""
         const armor_type = document.getElementById("armor_type").value
         const armor_texture = document.getElementById("armor_texture").value
-        const auto_copy_texture_armor = document.getElementById("auto_copy_armor_texture").value != ""? document.getElementById("auto_copy_armor_texture").value.toLowerCase() === "true" : ""
+        const auto_copy_texture_armor = document.getElementById("auto_copy_armor_texture").value != "" ? document.getElementById("auto_copy_armor_texture").value.toLowerCase() === "true" : ""
 
         if (!item_type || (!custom_model_data && !damage_predicate)) {
             return
@@ -142,10 +194,10 @@ function add_content() {
 
         const properties = {}
 
-        if (icon_2d !== "") {properties["icon"] = icon_2d}
-        if (allow_offhand !== "") {properties["allow_offhand"] = allow_offhand}
-        if (unbreakable !== "") {properties["unbreakable"] = unbreakable}
-        if (armor_texture !== "" && armor_type !== "" && auto_copy_texture_armor !== ""){
+        if (icon_2d !== "") { properties["icon"] = icon_2d }
+        if (allow_offhand !== "") { properties["allow_offhand"] = allow_offhand }
+        if (unbreakable !== "") { properties["unbreakable"] = unbreakable }
+        if (armor_texture !== "" && armor_type !== "" && auto_copy_texture_armor !== "") {
             properties["armor_layer"] = {
                 "type": armor_type,
                 "texture": armor_texture + (armor_texture.endsWith(".png") ? "" : ".png"),
@@ -179,16 +231,16 @@ function add_content() {
         const largechest = document.getElementById("largechest").value != "" ? document.getElementById("largechest").value.toLowerCase() === "true" : ""
 
         const properties = {}
-        if (ignore !== "") {properties["ignore"] = true}
-        if (smallchest !== "" || largechest !== ""){
+        if (ignore !== "") { properties["ignore"] = true }
+        if (smallchest !== "" || largechest !== "") {
             properties["gui"] = {}
-            if (offset_x !== "" || offset_y !== "") {properties["gui"]["offset"] = [offset_x || 0, offset_y || 0]}
-            if (size_x !== "" || size_y !== "") {properties["gui"]["size"] = [size_x || "default", size_y || "default"]}
-            if (smallchest !== "") {properties["gui"]["smallchest"] = true}
-            if (largechest !== "") {properties["gui"]["largechest"] = true}
+            if (offset_x !== "" || offset_y !== "") { properties["gui"]["offset"] = [offset_x || 0, offset_y || 0] }
+            if (size_x !== "" || size_y !== "") { properties["gui"]["size"] = [size_x || "default", size_y || "default"] }
+            if (smallchest !== "") { properties["gui"]["smallchest"] = true }
+            if (largechest !== "") { properties["gui"]["largechest"] = true }
         }
         if (Object.keys(properties).length !== 0) {
-            if (!code_obj["fonts"]){
+            if (!code_obj["fonts"]) {
                 code_obj["fonts"] = {}
             }
             code_obj["fonts"][symbol] = properties
@@ -203,14 +255,14 @@ function add_content() {
         document.getElementById("smallchest").value = ""
         document.getElementById("largechest").value = ""
     }
-    const code_str = JSON.stringify(code_obj, (key, value) => {return Array.isArray(value) ? JSON.stringify(value) : value}, "\t").replace(/"\[(.*?)\]"/g, "[$1]")
+    const code_str = JSON.stringify(code_obj, (key, value) => { return Array.isArray(value) ? JSON.stringify(value) : value }, "\t").replace(/"\[(.*?)\]"/g, "[$1]")
     ace.edit("jsonview").setValue(code_str)
 }
 
 function load_content_file() {
     const file = document.getElementById("file").files[0];
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
         let result_json = JSON.parse(e.target.result)
         if (result_json && typeof result_json === "object" && !("items" in result_json)) {
             result_json = sprites_to_content(result_json)
@@ -270,26 +322,26 @@ function sprites_to_content(input) {
     return output
 }
 
-function resize_gui_preview(){
+function resize_gui_preview() {
     const preview_width = document.getElementById("preview-gui").clientWidth
     const gui_preview_width = document.getElementById("gui-bg-image").clientWidth
     const zoomgui = preview_width / gui_preview_width
-    if (zoomgui < 1){
+    if (zoomgui < 1) {
         document.getElementById("gui-image").style.zoom = zoomgui * 0.8
         document.getElementById("gui-bg-image").style.zoom = zoomgui * 0.8
     }
 }
 
-window.addEventListener("resize", () => {if (document.getElementById("mode-fonts").classList.contains("flex")) resize_gui_preview() })
+window.addEventListener("resize", () => { if (document.getElementById("mode-fonts").classList.contains("flex")) resize_gui_preview() })
 
 function change_mode(mode_enable) {
     const modes = ["mode-settings", "mode-items", "mode-fonts"]
-    for (const disable_mode of modes){
+    for (const disable_mode of modes) {
         const element = document.getElementById(disable_mode)
         if (element.classList.contains("flex")) element.classList.replace("flex", "hidden")
     }
     document.getElementById(mode_enable).classList.replace("hidden", "flex")
-    if (mode_enable==="mode-fonts") resize_gui_preview()
+    if (mode_enable === "mode-fonts") resize_gui_preview()
 }
 
-function delete_code() {ace.edit("jsonview").setValue("{}")}
+function delete_code() { ace.edit("jsonview").setValue("{}") }
