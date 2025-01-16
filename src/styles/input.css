@@ -9,6 +9,7 @@ body {
 }
 
 .suggestion {
+    display: none;
     border: 1px solid #ccc;
     background: #282c38;
     position: absolute;

@@ -54,27 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
         input1.addEventListener("input", update);
         input2.addEventListener("input", update);
     };
-    setupInput("offset-x", "offset-y", (xInput, yInput) =>
-        update_preview_gui_position(xInput, yInput, guiImage)
-    );
-    setupInput("size-width", "size-height", (wInput, hInput) =>
-        update_preview_gui_size(wInput, hInput, guiImage)
-    );
+    setupInput("offset-x", "offset-y", (xInput, yInput) => update_preview_gui_position(xInput, yInput, guiImage));
+    setupInput("size-width", "size-height", (wInput, hInput) => update_preview_gui_size(wInput, hInput, guiImage));
     $("opacity-gui").addEventListener("input", change_gui_opacity);
     JsonEditor.on("change", () => localStorage.setItem("code", JsonEditor.getValue()));
-
-    window.addEventListener("resize", () => {
-        if ($("mode-fonts").classList.contains("flex")) resize_gui_preview();
-    });
 });
-
-function update_preview_gui_position(GuixInput, GuiyInput, guiimage) {
-    const x = parseInt(GuixInput.value * 2)
-    const y = parseInt(GuiyInput.value * 2)
-
-    guiimage.style.marginLeft = `${x}px`
-    guiimage.style.marginTop = `${y}px`
-}
 
 function update_preview_gui_position(GuixInput, GuiyInput, guiimage) {
     const x = parseInt(GuixInput.value * 2)
@@ -97,7 +81,7 @@ function change_gui_opacity() {
     const opacityValue = parseFloat(opacitySlider.value);
 
     document.getElementById("gui-image").style.opacity = opacityValue;
-    document.getElementById("opacity-label").textContent = `GUI Opacity: ${Math.round(opacityValue * 100)}%`;
+    document.getElementById("opacity-value").textContent = Math.round(opacityValue * 100)
 }
 
 function change_gui_image(event) {
@@ -322,11 +306,13 @@ function sprites_to_content(input) {
 function resize_gui_preview() {
     const preview_width = document.getElementById("preview-gui").clientWidth
     const gui_preview_width = document.getElementById("gui-bg-image").clientWidth
+    const opacity_label = document.getElementById("opacity-label")
     const zoomgui = preview_width / gui_preview_width
     if (zoomgui < 1) {
         document.getElementById("gui-image").style.zoom = zoomgui * 0.8
         document.getElementById("gui-bg-image").style.zoom = zoomgui * 0.8
     }
+    document.getElementById('opacity-div').clientWidth < 155 ? opacity_label.classList.add('hidden') : opacity_label.classList.remove('hidden')
 }
 
 window.addEventListener("resize", () => { if (document.getElementById("mode-fonts").classList.contains("flex")) resize_gui_preview() })
