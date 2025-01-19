@@ -1,61 +1,67 @@
 document.addEventListener("DOMContentLoaded", () => {
     const $ = (id) => document.getElementById(id);
-    const guiImageUpload = $("gui-image-upload");
-    const guiImageLabel = $("gui-image-label");
-    const guiImage = $("gui-image");
     const JsonEditor = ace.edit("jsonview");
+    const guiImage = $("gui-image");
 
-    window.onclick = (e) => {
-        if (!e.target.matches("#mode-change")) $("mode-change-contents")?.classList.add("hidden");
+    const setupDragAndDrop = (input, label, onDrop, dragText = "Drag & Drop to Upload") => {
+        const originalText = label.textContent.trim();
+
+        const toggleDragStyle = (isDragging) => {
+            label.textContent = isDragging ? dragText : originalText;
+            label.style.backgroundColor = isDragging ? "#4a5568" : "";
+            label.style.opacity = isDragging ? "0.5" : "1";
+        };
+
+        ["dragenter", "dragover"].forEach((event) =>
+            label.addEventListener(event, (e) => (e.preventDefault(), toggleDragStyle(true)))
+        );
+
+        ["dragleave", "drop"].forEach((event) =>
+            label.addEventListener(event, (e) => (e.preventDefault(), toggleDragStyle(false)))
+        );
+
+        label.addEventListener("drop", (e) => onDrop(e.dataTransfer.files[0]));
+        input.addEventListener("change", (e) => onDrop(e.target.files[0]));
     };
+
+    const handleFileLoad = (file, type, onSuccess) => {
+        if (!file?.type.startsWith(type)) {
+            return alert(`Please upload a valid ${type.split("/")[1]} file.`);
+        }
+        const reader = new FileReader();
+        reader.onload = () => onSuccess(reader.result);
+        type === "image/" ? reader.readAsDataURL(file) : reader.readAsText(file);
+    };    
+
+    setupDragAndDrop(
+        $("gui-image-upload"),
+        $("gui-image-label"),
+        (file) => handleFileLoad(file, "image/", (result) => (guiImage.src = result)),
+        "Drag & Drop to Upload Image"
+    );
+
+    setupDragAndDrop(
+        $("file"),
+        $("file").nextElementSibling,
+        (file) => handleFileLoad(file, "application/json", (result) => {
+            try {
+                const json = JSON.parse(result);
+                JsonEditor.setValue(JSON.stringify(json, null, 4));
+            } catch {
+                alert("Invalid JSON file.");
+            }
+        }),
+        "Drag & Drop JSON File"
+    );
+
+    const setupInput = (id1, id2, callback) =>
+        [$(id1), $(id2)].forEach((input) => input.addEventListener("input", () => callback($(id1), $(id2))));
+
+    window.onclick = (e) => !e.target.matches("#mode-change") && $("mode-change-contents")?.classList.add("hidden");
     window.addEventListener("beforeunload", (e) => e.preventDefault());
 
-    const setDragStyle = (isDragging) => {
-        if (isDragging) {
-            guiImageLabel.textContent = "Drag & Drop to Upload";
-            guiImageLabel.style.backgroundColor = "#4a5568";
-            guiImageLabel.style.opacity = "0.5";
-        } else {
-            guiImageLabel.textContent = "Upload GUI Texture";
-            guiImageLabel.style.backgroundColor = "";
-            guiImageLabel.style.opacity = "1";
-        }
-    };
-
-    ["dragenter", "dragover"].forEach((ev) =>
-        guiImageLabel.addEventListener(ev, (e) => {
-            e.preventDefault();
-            setDragStyle(true);
-        })
-    );
-    ["dragleave", "drop"].forEach((ev) =>
-        guiImageLabel.addEventListener(ev, (e) => {
-            e.preventDefault();
-            setDragStyle(false);
-        })
-    );
-
-    guiImageLabel.addEventListener("drop", (e) => {
-        e.preventDefault();
-        const file = e.dataTransfer.files[0];
-        if (file?.type.startsWith("image/")) {
-            const reader = new FileReader();
-            reader.onload = () => (guiImage.src = reader.result);
-            reader.readAsDataURL(file);
-        } else alert("Please drop a valid image file.");
-    });
-
-    guiImageUpload.addEventListener("change", change_gui_image);
-
-    const setupInput = (id1, id2, callback) => {
-        const input1 = $(id1);
-        const input2 = $(id2);
-        const update = () => callback(input1, input2);
-        input1.addEventListener("input", update);
-        input2.addEventListener("input", update);
-    };
-    setupInput("offset-x", "offset-y", (xInput, yInput) => update_preview_gui_position(xInput, yInput, guiImage));
-    setupInput("size-width", "size-height", (wInput, hInput) => update_preview_gui_size(wInput, hInput, guiImage));
+    setupInput("offset-x", "offset-y", (x, y) => update_preview_gui_position(x, y, guiImage));
+    setupInput("size-width", "size-height", (w, h) => update_preview_gui_size(w, h, guiImage));
     $("opacity-gui").addEventListener("input", change_gui_opacity);
     JsonEditor.on("change", () => localStorage.setItem("code", JsonEditor.getValue()));
 });
