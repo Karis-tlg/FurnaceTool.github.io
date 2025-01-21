@@ -1,0 +1,42 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/24fada58cd.js" crossorigin="anonymous"></script>
+        <link href="/src/styles/style.css" rel="stylesheet">
+        <link href="/src/images/logo.png" rel="icon" type="image/png">
+        <link href="/src/styles/docs.css" rel="stylesheet">
+        <script type="importmap">
+            {
+                "imports": {
+                    "marked": "https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.6/lib/marked.esm.min.js",
+                    "marked-gfm-heading-id": "https://cdn.jsdelivr.net/npm/marked-gfm-heading-id@4.1.1/+esm"
+                }
+            }
+        </script>
+        <script type="module" src="/src/scripts/docwriter.js"></script>
+        <title>Document</title>
+    </head>
+    <body class="bg-[#222831] m-0 p-0">
+        <nav class="flex items-center w-full h-16 shadow-md border-r-2 border-gray-800 mb-3">
+            <button id="docs-sidebar-btn" class="h-10 w-10 text-xl hidden"><i class="fa-solid fa-bars"></i></button>
+            <a href="/" class="flex items-center w-1/4 overflow-hidden">
+                <img class="inline h-14 w-14 m-0 p-0" src="/src/images/logo-nobg.png">
+                <span class="h-10 text-3xl font-bold content-center text-center">Furnace</span>
+            </a>
+            <div class="absolute flex right-0 mr-1.5 items-center">
+                <a href="https://discord.gg/4jvpVGpeBE">
+                    <span class="hover:text-blue-500 h-10 text-xl font-bold content-center text-center"><i class="fa-brands fa-discord"></i> Discord</span>
+                </a>
+            </div>
+        </nav>
+        <div id="docs" class="w-full h-[calc(100%-5rem)] flex">
+            <div id="docs-sidebar" class="flex flex-col w-52 h-full gap-y-3 hover:overflow-y-scroll scrollbar">
+                <div id="docs-sidebar-btn-home" class="w-full h-10 pl-5 content-center cursor-pointer rounded hover:bg-gray-500 hover:shadow hover:opacity-50"><i class="fa-solid fa-house"></i> Home</div>
+                <span class="font-bold">Getting Started</span>
+                <div id="docs-sidebar-btn-editor" class="w-full h-10 pl-5 content-center cursor-pointer rounded hover:bg-gray-500 hover:shadow hover:opacity-50"><i class="fa-solid fa-pen"></i> Editor Guide</div>
+            </div>
+            <div id="doc-content" class="w-full h-full p-5 hover:overflow-y-scroll scrollbar"></div>
+        </div>
+    </body>
+</html>

@@ -25,3 +25,25 @@ body {
 .suggestion div:hover {
     background: dodgerblue;
 }
+
+.scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #36454f #3E505C;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%) }
+    to { transform: translateX(0) }
+}
+@keyframes slideOut {
+    from { transform: translateX(0) }
+    to { transform: translateX(-100%) }
+}
+
+.sidebar-open {
+    animation: slideIn 0.3s forwards
+}
+
+.sidebar-closed {
+    animation: slideOut 0.3s forwards
+}
