@@ -6,11 +6,13 @@
         <link href="/src/styles/style.css" rel="stylesheet">
         <link href="/src/images/logo.png" rel="icon" type="image/png">
         <link href="/src/styles/docs.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js/styles/atom-one-dark.min.css">
         <script type="importmap">
             {
                 "imports": {
                     "marked": "https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.6/lib/marked.esm.min.js",
-                    "marked-gfm-heading-id": "https://cdn.jsdelivr.net/npm/marked-gfm-heading-id@4.1.1/+esm"
+                    "marked-gfm-heading-id": "https://cdn.jsdelivr.net/npm/marked-gfm-heading-id@4.1.1/+esm",
+                    "highlight.js": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/es/highlight.min.js"
                 }
             }
         </script>
@@ -31,12 +33,13 @@
             </div>
         </nav>
         <div id="docs" class="w-full h-[calc(100%-5rem)] flex">
-            <div id="docs-sidebar" class="flex flex-col w-52 h-full gap-y-3 hover:overflow-y-scroll scrollbar">
-                <div id="docs-sidebar-btn-home" class="w-full h-10 pl-5 content-center cursor-pointer rounded hover:bg-gray-500 hover:shadow hover:opacity-50"><i class="fa-solid fa-house"></i> Home</div>
-                <span class="font-bold">Getting Started</span>
-                <div id="docs-sidebar-btn-editor" class="w-full h-10 pl-5 content-center cursor-pointer rounded hover:bg-gray-500 hover:shadow hover:opacity-50"><i class="fa-solid fa-pen"></i> Editor Guide</div>
+            <div>
+                <div id="docs-sidebar" class="flex flex-col w-64 h-[calc(100%-5rem)] gap-y-3 hover:overflow-y-scroll pl-3 scrollbar"></div>
+                <div id="docs-sidebar-footer" class="h-20 w-64 flex items-center justify-center">
+                    <a href="https://github.com/FurnaceTool/FurnaceTool.github.io/tree/main/src/docs" target="_blank" class="hover:text-white"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                </div>
             </div>
-            <div id="doc-content" class="w-full h-full p-5 hover:overflow-y-scroll scrollbar"></div>
+            <div id="doc-content" class="w-full h-full p-5 hover:overflow-y-scroll scrollbar shadow"></div>
         </div>
     </body>
 </html>

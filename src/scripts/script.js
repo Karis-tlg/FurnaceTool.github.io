@@ -4,12 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const guiImage = $("gui-image");
 
     const setupDragAndDrop = (input, label, onDrop, dragText = "Drag & Drop to Upload") => {
-        const originalText = label.textContent.trim();
+        const originalText = label.innerHTML
 
         const toggleDragStyle = (isDragging) => {
-            label.textContent = isDragging ? dragText : originalText;
-            label.style.backgroundColor = isDragging ? "#4a5568" : "";
-            label.style.opacity = isDragging ? "0.5" : "1";
+            label.innerHTML = isDragging ? dragText : originalText
+            label.style.backgroundColor = isDragging ? "#4a5568" : ""
+            label.style.opacity = isDragging ? "0.5" : "1"
         };
 
         ["dragenter", "dragover"].forEach((event) =>
@@ -45,11 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
         $("file").nextElementSibling,
         (file) => handleFileLoad(file, "application/json", (result) => {
             try {
-                const json = JSON.parse(result);
-                JsonEditor.setValue(JSON.stringify(json, null, 4));
-            } catch {
-                alert("Invalid JSON file.");
-            }
+                let json = JSON.parse(result)
+                if (json && typeof json === "object" && !("items" in json || "fonts" in json)) {
+                    json = sprites_to_content(json)
+                }
+                JsonEditor.setValue(JSON.stringify(json, null, 4))
+            } catch { alert("Invalid JSON file.") }
         }),
         "Drag & Drop JSON File"
     );
@@ -245,20 +246,6 @@ function add_content() {
     }
     const code_str = JSON.stringify(code_obj, (key, value) => { return Array.isArray(value) ? JSON.stringify(value) : value }, "\t").replace(/"\[(.*?)\]"/g, "[$1]")
     ace.edit("jsonview").setValue(code_str)
-}
-
-function load_content_file() {
-    const file = document.getElementById("file").files[0];
-    const reader = new FileReader();
-    reader.onload = function (e) {
-        let result_json = JSON.parse(e.target.result)
-        if (result_json && typeof result_json === "object" && !("items" in result_json)) {
-            result_json = sprites_to_content(result_json)
-        }
-        const code_str = JSON.stringify(result_json, null, 4)
-        ace.edit("jsonview").setValue(code_str)
-    };
-    reader.readAsText(file);
 }
 
 function download_content() {
