@@ -27,14 +27,14 @@ renderer.blockquote = (quote) => {
 }
 
 renderer.link = (link) => {
-    if (link.text.endsWith(">>>"))  return `<a href="${link.href}" class="rounded shadow flex items-center justify-between bg-[#282c38] pl-1.5 h-8 max-w-96 w-full hover:bg-[#222831]">${link.text.slice(0, -3)} <i class="fa-solid fa-arrow-right"></i></a>`
+    if (link.text.endsWith(">>>"))  return `<a href="${link.href}" class="rounded-sm shadow-sm flex items-center justify-between bg-[#282c38] pl-1.5 h-8 max-w-96 w-full hover:bg-[#222831]">${link.text.slice(0, -3)} <i class="fa-solid fa-arrow-right"></i></a>`
     return `<a href="${link.href}">${link.text}</a>`
 }
 
 renderer.code = (code) => {
     const validLang = hljs.getLanguage(code.lang) ? code.lang : 'plaintext'
     const highlighted = hljs.highlight(code.text, { language: validLang })
-    return `<pre class="bg-[#282c38] rounded shadow p-5 mb-5"><code>${highlighted.value}</code></pre>`
+    return `<pre class="bg-[#282c38] rounded-sm shadow-sm p-5 mb-5"><code>${highlighted.value}</code></pre>`
 }
 
 marked.use(gfmHeadingId({prefix: "doc"}))
@@ -44,7 +44,7 @@ window.addEventListener("DOMContentLoaded", () => {
     for (const [doc, icon, group] of doc_files) {
         const button = document.createElement("button")
         button.id = `docs-sidebar-btn-${group}/${doc}`
-        button.classList.add("rounded", "w-full", "h-8", "flex", "gap-x-1.5", "items-center", "justify-left", "hover:bg-white", "hover:opacity-25")
+        button.classList.add("rounded-sm", "w-full", "h-8", "flex", "gap-x-1.5", "items-center", "justify-left", "hover:bg-white", "hover:opacity-25")
         button.innerHTML = `<i class="fa-solid ${icon}"></i> ${doc}`
         getDocGroup(group).appendChild(button)
     }

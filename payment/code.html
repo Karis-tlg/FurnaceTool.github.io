@@ -23,7 +23,7 @@
         </nav>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <p class="bg-[#222630] px-4 py-3 h-14 text-white rounded-lg border-2 transition-colors duration-100 border-solid focus:border-[#596A95] border-[#2B3040]" id="code"></p>
-            <button onclick="copyCode()" class="relative my-3 inline-flex h-12 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none">
+            <button onclick="copyCode()" class="relative my-3 inline-flex h-12 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-hidden">
                 <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#e7029a_0%,#f472b6_50%,#bd5fff_100%)]"></span>
                 <span class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-slate-950 px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined">
                     Copy GiftCode <i class="fa-solid fa-copy"></i>
@@ -32,7 +32,7 @@
         </div>
 
         <!-- Toast Notification -->
-        <div class="absolute opacity-0 transition-opacity delay-100 truncate bottom-0 right-0 h-full max-h-12 w-full max-w-96 p-4 mb-4 text-sm rounded bg-[#282c38] shadow" id="toast">
+        <div class="absolute opacity-0 transition-opacity delay-100 truncate bottom-0 right-0 h-full max-h-12 w-full max-w-96 p-4 mb-4 text-sm rounded-sm bg-[#282c38] shadow-sm" id="toast">
             <span class="text-gray-500 my-auto"><i class="fa-solid fa-circle-check text-green-700"></i> Code copied to clipboard!</span>
         </div>
 

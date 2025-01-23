@@ -24,20 +24,20 @@
             </a>
         </div>
     </nav>
-    <div class="bg-[#393E46] w-11/12 m-auto rounded pb-1.5">
+    <div class="bg-[#393E46] w-11/12 m-auto rounded-sm pb-1.5">
         <p class="text-xl font-bold p-3">Adding Content</p>
         <from id="mode-settings" class="flex flex-row flex-wrap gap-1.5 py-5 max-h-48 mx-[4%]">
             <div class="flex flex-row w-full gap-x-1.5">
                 <div class="w-1/2">
-                    <input id="material" class="bg-[#282c38] rounded shadow w-full h-8 pl-1.5" type="text" placeholder="Material">
+                    <input id="material" class="bg-[#282c38] rounded-sm shadow-sm w-full h-8 pl-1.5" type="text" placeholder="Material">
                     <div id="material_suggestions" class="suggestion" class="hidden"></div>
                 </div>
                 <div class="w-1/2">
-                    <input id="blockmaterial" class="bg-[#282c38] rounded shadow w-full h-8 pl-1.5" type="text" placeholder="Block Material">
+                    <input id="blockmaterial" class="bg-[#282c38] rounded-sm shadow-sm w-full h-8 pl-1.5" type="text" placeholder="Block Material">
                     <div id="blockmaterial_suggestions" class="suggestion" class="hidden"></div>
                 </div>
             </div>
-            <select id="modelengine_model" class="bg-[#282c38] rounded shadow w-full h-8 pl-1.5">
+            <select id="modelengine_model" class="bg-[#282c38] rounded-sm shadow-sm w-full h-8 pl-1.5">
                 <option value="">Model Engine Generate Model: Null</option>
                 <option value="true">Model Engine Generate Model: True</option>
                 <option value="false">Model Engine Generate Model: False</option>
@@ -45,71 +45,71 @@
             </select>
             <div class="flex flex-row w-full gap-x-1.5">
                 <div class="w-1/2">
-                    <input id="modelengine_item" class="bg-[#282c38] rounded shadow w-full h-8 pl-1.5" type="text" placeholder="ModelEngine Item">
+                    <input id="modelengine_item" class="bg-[#282c38] rounded-sm shadow-sm w-full h-8 pl-1.5" type="text" placeholder="ModelEngine Item">
                     <div id="modelengine_item_suggestions" class="suggestion" style="display: none;"></div>
                 </div>
-                <input id="modelengine_namespace" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="ModelEngine Namespace">
+                <input id="modelengine_namespace" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5" type="text" placeholder="ModelEngine Namespace">
             </div>
         </from>
         <from id="mode-items" class="hidden flex-col gap-1.5 py-5 flex-wrap max-h-[195px] mx-[4%]">
             <div class="w-1/2">
-                <input id="item_type" class="bg-[#282c38] rounded shadow w-full h-8 pl-1.5" type="text" placeholder="Item Type">
+                <input id="item_type" class="bg-[#282c38] rounded-sm shadow-sm w-full h-8 pl-1.5" type="text" placeholder="Item Type">
                 <div id="item_suggestions" class="suggestion" style="display: none;"></div>
             </div>
-            <input id="custom_model_data" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="number" placeholder="Custom Model Data">
-            <input id="damage_predicate" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="number" step="0.001" placeholder="Damage Predicate">
-            <input id="icon_2d" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="Icon Item">
-            <input id="path_add" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="Path Add">
+            <input id="custom_model_data" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5" type="number" placeholder="Custom Model Data">
+            <input id="damage_predicate" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5" type="number" step="0.001" placeholder="Damage Predicate">
+            <input id="icon_2d" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5" type="text" placeholder="Icon Item">
+            <input id="path_add" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5" type="text" placeholder="Path Add">
             <div class="flex flex-row w-1/2 gap-x-1.5">
-                <select id="allow_offhand" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5">
+                <select id="allow_offhand" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5">
                     <option value="">Allow Offhand: Null</option>
                     <option value="true">Allow Offhand: True</option>
                     <option value="false">Allow Offhand: False</option>
                 </select>
-                <select id="unbreakable" class="bg-[#282c38] rounded shadow w-[30%] grow h-8 pl-1.5">
+                <select id="unbreakable" class="bg-[#282c38] rounded-sm shadow-sm w-[30%] grow h-8 pl-1.5">
                     <option value="">Unbreakable: Null</option>
                     <option value="true">Unbreakable: True</option>
                     <option value="false">Unbreakable: False</option>
                 </select>
             </div>
             <div class="flex flex-row w-1/2 gap-x-1.5">
-                <select id="armor_type" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5">
+                <select id="armor_type" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5">
                     <option value="">Armor Type: Null</option>
                     <option value="helmet">Armor Type: Helmet</option>
                     <option value="chestplate">Armor Type: Chestplate</option>
                     <option value="leggings">Armor Type: Leggings</option>
                     <option value="boots">Armor Type: Boots</option>
                 </select>
-                <select id="auto_copy_armor_texture" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5">
+                <select id="auto_copy_armor_texture" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5">
                     <option value="">Auto Copy Armor Texture: Null</option>
                     <option value="true">Auto Copy Armor Texture: True</option>
                     <option value="false">Auto Copy Armor Texture: False</option>
                 </select>
             </div>
-            <input id="armor_texture" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="Armor Texture">
+            <input id="armor_texture" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5" type="text" placeholder="Armor Texture">
         </from>
         <from id="mode-fonts" class="hidden flex-col gap-1.5 py-5 flex-wrap max-h-96 mx-[4%]">
-            <input id="symbol" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="Font Symbol">
-            <select id="ignore" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5">
+            <input id="symbol" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5" type="text" placeholder="Font Symbol">
+            <select id="ignore" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5">
                 <option value="">Ignore: Null</option>
                 <option value="true">Ignore: True</option>
                 <option value="false">Ignore: False</option>
             </select>
             <div class="flex flex-row w-1/2 gap-x-1.5">
-                <input id="offset-x" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="Gui Offset X">
-                <input id="offset-y" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="text" placeholder="Gui Offset Y">
+                <input id="offset-x" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5" type="text" placeholder="Gui Offset X">
+                <input id="offset-y" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5" type="text" placeholder="Gui Offset Y">
             </div>
             <div class="flex flex-row w-1/2 gap-x-1.5">
-                <input id="size-width" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="number" placeholder="Gui Width">
-                <input id="size-height" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5" type="number" placeholder="Gui Height">
+                <input id="size-width" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5" type="number" placeholder="Gui Width">
+                <input id="size-height" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5" type="number" placeholder="Gui Height">
             </div>
             <div class="flex flex-row w-1/2 gap-x-1.5">
-                <select id="smallchest" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5">
+                <select id="smallchest" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5">
                     <option value="">Gui Small Chest: Null</option>
                     <option value="true">Gui Small Chest: True</option>
                     <option value="false">Gui Small Chest: False</option>
                 </select>
-                <select id="largechest" class="bg-[#282c38] rounded shadow w-1/2 h-8 pl-1.5">
+                <select id="largechest" class="bg-[#282c38] rounded-sm shadow-sm w-1/2 h-8 pl-1.5">
                     <option value="">Gui Large Chest: Null</option>
                     <option value="true">Gui Large Chest: True</option>
                     <option value="false">Gui Large Chest: False</option>
@@ -117,8 +117,8 @@
             </div>
             <div class="flex flex-row w-1/2 gap-x-1.5">
                 <input id="gui-image-upload" type="file" accept="image/*" onchange="change_gui_image(event)" hidden>
-                <label id="gui-image-label" for="gui-image-upload" class="bg-[#282c38] rounded shadow h-8 w-1/2 pl-1.5 block content-center truncate">Upload Gui Texture</label>
-                <select id="gui-bg" class="bg-[#282c38] rounded shadow h-8 w-1/2 pl-1.5" onchange="document.getElementById('gui-bg-image').src = `/src/images/generic_${this.value}.png`">
+                <label id="gui-image-label" for="gui-image-upload" class="bg-[#282c38] rounded-sm shadow-sm h-8 w-1/2 pl-1.5 block content-center truncate">Upload Gui Texture</label>
+                <select id="gui-bg" class="bg-[#282c38] rounded-sm shadow-sm h-8 w-1/2 pl-1.5" onchange="document.getElementById('gui-bg-image').src = `/src/images/generic_${this.value}.png`">
                     <option value="54">Row: 54</option>
                     <option value="45">Row: 45</option>
                     <option value="36">Row: 36</option>
@@ -128,35 +128,35 @@
                     <option value="5">Row: 5</option>
                 </select>
             </div>
-            <div class="flex items-center gap-2 w-1/2 bg-[#282c38] rounded shadow">
+            <div class="flex items-center gap-2 w-1/2 bg-[#282c38] rounded-sm shadow-sm">
                 <div id="opacity-div" class="w-1/3 text-nowrap overflow-hidden">
                     <label id="opacity-label" for="opacity-gui" class="pl-1.5 overflow-hidden whitespace-nowrap">GUI Opacity: </label>
                     <span id="opacity-value" class="inline-block" style="margin-left: 5px;">100</span>%
                 </div>
-                <input id="opacity-gui" oninput="change_gui_opacity()" type="range" min="0" max="1" step="0.01" value="1" class="bg-[#282c38] accent-gray-700 rounded h-8 w-2/3" style="transform: translateX(-5px);">
+                <input id="opacity-gui" oninput="change_gui_opacity()" type="range" min="0" max="1" step="0.01" value="1" class="bg-[#282c38] accent-gray-700 rounded-sm h-8 w-2/3" style="transform: translateX(-5px);">
             </div>
-            <div id="preview-gui" class="bg-[#202020] w-1/2 h-64 flex rounded shadow items-center justify-center">
+            <div id="preview-gui" class="bg-[#202020] w-1/2 h-64 flex rounded-sm shadow-sm items-center justify-center">
                 <img id="gui-bg-image" src="/src/images/generic_54.png" class="pointer-events-none absolute">
                 <img id="gui-image" class="absolute">
             </div>
         </from>
         <div class="grid grid-cols-3 grid-rows-2 w-11/12 mx-auto gap-1.5">
-            <button class="truncate bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow h-8 hover:from-[#000000] hover:to-[#222831]" onclick="add_content()"><i class="fa-solid fa-square-plus"></i> Add Content</button>
-            <button class="truncate bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow h-8 hover:from-[#000000] hover:to-[#222831]" onclick="copy_code()"><i class="fa-solid fa-copy"></i> Copy Content</button>
+            <button class="truncate bg-linear-to-r from-[#282c38] to-[#222831] rounded-sm shadow-sm h-8 hover:from-[#000000] hover:to-[#222831]" onclick="add_content()"><i class="fa-solid fa-square-plus"></i> Add Content</button>
+            <button class="truncate bg-linear-to-r from-[#282c38] to-[#222831] rounded-sm shadow-sm h-8 hover:from-[#000000] hover:to-[#222831]" onclick="copy_code()"><i class="fa-solid fa-copy"></i> Copy Content</button>
             <input id="file" type="file" accept="application/json" onchange="load_content_file()" hidden>
-            <label for="file" class="truncate text-center cursor-pointer content-center bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow h-8 hover:from-[#000000] hover:to-[#222831]"><i class="fa-solid fa-file-arrow-up"></i> Upload content</label>
-            <button id="download" class="truncate bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow h-8 hover:from-[#000000] hover:to-[#222831]" onclick="download_content()"><i class="fa-solid fa-download"></i> Download content</button>
-            <button id="delete" class="truncate bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow h-8 hover:from-[#000000] hover:to-[#222831]" onclick="delete_code()"><i class="fa-solid fa-trash"></i> Delete Content</button></button>
+            <label for="file" class="truncate text-center cursor-pointer content-center bg-linear-to-r from-[#282c38] to-[#222831] rounded-sm shadow-sm h-8 hover:from-[#000000] hover:to-[#222831]"><i class="fa-solid fa-file-arrow-up"></i> Upload content</label>
+            <button id="download" class="truncate bg-linear-to-r from-[#282c38] to-[#222831] rounded-sm shadow-sm h-8 hover:from-[#000000] hover:to-[#222831]" onclick="download_content()"><i class="fa-solid fa-download"></i> Download content</button>
+            <button id="delete" class="truncate bg-linear-to-r from-[#282c38] to-[#222831] rounded-sm shadow-sm h-8 hover:from-[#000000] hover:to-[#222831]" onclick="delete_code()"><i class="fa-solid fa-trash"></i> Delete Content</button></button>
             <div class="relative inline-block">
-                <button id="mode-change" class="truncate bg-gradient-to-r from-[#282c38] to-[#222831] rounded shadow w-full h-8 hover:from-[#000000] hover:to-[#222831]" onclick="document.getElementById('mode-change-contents').classList.toggle('hidden')"><i class="fa-solid fa-rotate"></i> Change Mode</button>
-                <div id="mode-change-contents" class="hidden absolute bg-[#282c38] z-10 shadow min-w-full rounded">
+                <button id="mode-change" class="truncate bg-linear-to-r from-[#282c38] to-[#222831] rounded-sm shadow-sm w-full h-8 hover:from-[#000000] hover:to-[#222831]" onclick="document.getElementById('mode-change-contents').classList.toggle('hidden')"><i class="fa-solid fa-rotate"></i> Change Mode</button>
+                <div id="mode-change-contents" class="hidden absolute bg-[#282c38] z-10 shadow-sm min-w-full rounded-sm">
                     <button onclick="change_mode('mode-settings')" class="hover:bg-[#222831] w-full truncate"><i class="fa-solid fa-gear"></i> Settings</button>
                     <button onclick="change_mode('mode-items')" class="hover:bg-[#222831] w-full truncate"><i class="fa-solid fa-paper-plane"></i> Items</button>
                     <button onclick="change_mode('mode-fonts')" class="hover:bg-[#222831] w-full truncate"><i class="fa-solid fa-feather"></i> Fonts</button>
                 </div>
             </div>
         </div>
-        <div id="jsonview" class="w-11/12 h-60 mx-auto rounded my-3"></div>
+        <div id="jsonview" class="w-11/12 h-60 mx-auto rounded-sm my-3"></div>
         <script>ace.edit("jsonview", { theme: "ace/theme/one_dark", mode: "ace/mode/json", value: localStorage.getItem("code") || "{}" }).setShowPrintMargin(false)</script>
     </div>
     <footer class="flex items-center justify-center w-full">
