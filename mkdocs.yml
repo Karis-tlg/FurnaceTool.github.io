@@ -1,6 +1,6 @@
 site_name: Furnace Docs
-docs_dir: src/docs
-site_dir: docs/
+docs_dir: ./src/docs
+site_dir: ./docs/
 site_url: https://furnacetool.github.io/docs/
 repo_url: https://github.com/furnacetool/furnacetool.github.io
 copyright: "&copy; 2025 Furnace. All rights reserved."
