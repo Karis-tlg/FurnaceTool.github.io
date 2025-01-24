@@ -1,5 +1,5 @@
 node_modules/
 __pycache__/
 .vscode/
-docs/
+
 src/styles/style.css
