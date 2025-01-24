@@ -17,7 +17,7 @@ renderer.blockquote = (quote) => {
     
     for (const [key, icon] of Object.entries(icons)) {
         if (quote.text.startsWith(key)) {
-            const clazz = key.toLowerCase().slice(3, -2);
+            const clazz = key.toLowerCase().slice(2, -2);
             const text = quote.text.replace(key, `<i class="fa-solid ${icon}"></i> `);
             return `<blockquote class="${clazz}">${text}</blockquote>`;
         }

@@ -24,6 +24,10 @@ body {
     font-size: 16px;
 }
 
+input::placeholder {
+  color: #9EABA0
+}
+
 .suggestion {
     display: none;
     border: 1px solid #ccc;
