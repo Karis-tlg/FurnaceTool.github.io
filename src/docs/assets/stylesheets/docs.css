@@ -1,0 +1,19 @@
+.md-header .md-logo img {
+    transform: scale(2.5)
+}
+
+.md-header {
+    background-color: #282c38;
+}
+
+label.md-nav__title {
+    background-color: #282c38;
+}
+
+@media screen and (max-width: 76.2344em) {
+    .md-nav--primary .md-nav__title[for=__drawer] {
+        background-color: #282c38;
+        color: var(--md-primary-bg-color);
+        font-weight: 700;
+    }
+}

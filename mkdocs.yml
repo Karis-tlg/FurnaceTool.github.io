@@ -11,10 +11,15 @@ theme:
   palette:
     scheme: slate
 extra_css:
-  - https://furnacetool.github.io/src/styles/docs.css
+  - assets/stylesheets/docs.css
 extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/furnacetool
     - icon: fontawesome/brands/discord
       link: https://discord.gg/4jvpVGpeBE
+markdown_extensions:
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
