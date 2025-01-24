@@ -1,0 +1,7 @@
+.md-header .md-logo img {
+    transform: scale(2.5)
+}
+
+.md-header {
+    background-color: #282c38;
+}
