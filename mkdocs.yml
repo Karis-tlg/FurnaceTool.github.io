@@ -11,7 +11,7 @@ theme:
   palette:
     scheme: slate
 extra_css:
-  - http://localhost:5500/src/styles/docs.css
+  - https://furnacetool.github.io/src/styles/docs.css
 extra:
   social:
     - icon: fontawesome/brands/github
